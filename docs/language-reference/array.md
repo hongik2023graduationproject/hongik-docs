@@ -39,6 +39,8 @@
 출력(목록)    // [10, 2, 3]
 ```
 
+<a :href="'/playground/?code=' + encodeURIComponent('배열 숫자들 = [1, 2, 3, 4, 5]\n출력(숫자들[0])\n출력(숫자들[-1])\n출력(길이(숫자들))\n\n추가(숫자들, 6)\n출력(숫자들)')" target="_blank">플레이그라운드에서 실행 →</a>
+
 ## 관련 내장 함수
 
 - [`길이(배열)`](/builtin-functions/array) - 배열 길이

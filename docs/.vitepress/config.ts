@@ -93,6 +93,7 @@ export default defineConfig({
             { text: '설치 & 빌드', link: '/getting-started/installation' },
             { text: '첫 프로그램', link: '/getting-started/first-program' },
             { text: 'REPL 모드', link: '/getting-started/repl' },
+            { text: '자주 발생하는 오류', link: '/getting-started/troubleshooting' },
           ],
         },
       ],
@@ -153,6 +154,14 @@ export default defineConfig({
             { text: '예외 처리', link: '/language-reference/exception-handling' },
             { text: '모듈 & 가져오기', link: '/language-reference/modules' },
             { text: '바이트코드 VM', link: '/language-reference/vm' },
+          ],
+        },
+        {
+          text: '참조',
+          collapsed: false,
+          items: [
+            { text: '연산자 우선순위', link: '/language-reference/operators' },
+            { text: '스코프와 변수 가시성', link: '/language-reference/scope' },
           ],
         },
       ],
