@@ -176,6 +176,7 @@ export default defineConfig({
             { text: '문자열 함수', link: '/builtin-functions/string' },
             { text: '수학 함수', link: '/builtin-functions/math' },
             { text: '고차 함수', link: '/builtin-functions/higher-order' },
+            { text: 'JSON 함수', link: '/builtin-functions/json' },
             { text: '파일 I/O', link: '/builtin-functions/file-io' },
           ],
         },
