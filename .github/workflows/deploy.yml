@@ -1,59 +1,88 @@
-name: Deploy Documentation
+name: Docs CI/CD
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'docs/**'
-      - 'docs/.vitepress/**'
-      - '.github/workflows/deploy.yml'
-      - 'package.json'
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 코드 체크아웃
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Node
+      - name: Node.js 설정
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: 의존성 설치
+        run: npm ci
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build with VitePress
+      - name: 문서 빌드
         run: npm run docs:build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: 빌드 결과물 업로드
+        uses: actions/upload-artifact@v4
         with:
+          name: docs-dist
           path: docs/.vitepress/dist
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
+  build-deploy:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    needs: build-test
+    permissions:
+      contents: read
+      packages: write
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: 문서 빌드
+        run: npm run docs:build
+
+      - name: Docker Buildx 설정
+        uses: docker/setup-buildx-action@v3
+
+      - name: GHCR 로그인
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker 이미지 빌드 & Push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/hongik-docs:latest
+            ghcr.io/${{ github.repository_owner }}/hongik-docs:${{ github.sha }}
+          platforms: linux/arm64
+
+      - name: 서버에 배포
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin:$HOME/.docker/bin
+            cd ~/server
+            docker compose pull hongik-docs
+            docker compose up -d hongik-docs
