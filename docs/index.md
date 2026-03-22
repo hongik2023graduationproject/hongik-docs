@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: 플레이그라운드
-      link: /playground/
+      link: https://hongik.tolelom.xyz
     - theme: alt
       text: 시작하기
       link: /getting-started/introduction
