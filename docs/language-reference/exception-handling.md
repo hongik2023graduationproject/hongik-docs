@@ -55,4 +55,4 @@
 출력(안전나눗셈(10, 0))    // 오류 메시지 출력 후 0
 ```
 
-<a :href="'/playground/?code=' + encodeURIComponent('함수 안전나눗셈(정수 a, 정수 b) -> 정수:\n    시도:\n        리턴 a / b\n    실패 오류:\n        출력(&quot;오류: &quot; + 문자변환(오류))\n        리턴 0\n\n출력(안전나눗셈(10, 2))\n출력(안전나눗셈(10, 0))')" target="_blank">플레이그라운드에서 실행 →</a>
+<a :href="$playgroundUrl + '/?code=' + encodeURIComponent('함수 안전나눗셈(정수 a, 정수 b) -> 정수:\n    시도:\n        리턴 a / b\n    실패 오류:\n        출력(&quot;오류: &quot; + 문자변환(오류))\n        리턴 0\n\n출력(안전나눗셈(10, 2))\n출력(안전나눗셈(10, 0))')" target="_blank">플레이그라운드에서 실행 →</a>

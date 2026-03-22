@@ -75,11 +75,7 @@ export default defineConfig({
       },
       {
         text: '플레이그라운드',
-        link: '/playground/',
-      },
-      {
-        text: 'GitHub',
-        link: 'https://github.com/hongik-ik/hong-ik',
+        link: 'https://hongik.tolelom.xyz',
       },
     ],
 
@@ -213,7 +209,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/hongik-ik/hong-ik' },
+      { icon: 'github', link: 'https://github.com/hongik2023graduationproject/hong-ik' },
     ],
 
     footer: {

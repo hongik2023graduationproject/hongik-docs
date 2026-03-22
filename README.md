@@ -1,6 +1,6 @@
 # hong-ik Documentation Site
 
-[hong-ik](https://github.com/hongik-ik/hong-ik) 프로그래밍 언어의 공식 문서 사이트입니다.
+[hong-ik](https://github.com/hongik2023graduationproject/hong-ik) 프로그래밍 언어의 공식 문서 사이트입니다.
 
 ## 프로젝트 구조
 
@@ -108,5 +108,5 @@ npm run docs:preview
 
 ## 관련 링크
 
-- [hong-ik GitHub](https://github.com/hongik-ik/hong-ik)
+- [hong-ik GitHub](https://github.com/hongik2023graduationproject/hong-ik)
 - [hong-ik 공식 사이트](https://hongik-lang.dev)

@@ -12,7 +12,7 @@
 ### 1. 저장소 클론
 
 ```bash
-git clone https://github.com/hongik-ik/hong-ik.git
+git clone https://github.com/hongik2023graduationproject/hong-ik.git
 cd hong-ik
 ```
 

@@ -4,13 +4,15 @@ import { ref, onMounted } from 'vue'
 const wrapper = ref<HTMLElement>()
 const playgroundUrl = ref('')
 
+const playgroundBase = import.meta.env.VITE_PLAYGROUND_URL || 'https://hongik.tolelom.xyz'
+
 onMounted(() => {
   if (!wrapper.value) return
   const codeEl = wrapper.value.querySelector('pre code')
   if (!codeEl) return
   const code = codeEl.textContent || ''
   const encoded = encodeURIComponent(code.trim())
-  playgroundUrl.value = `/playground/?code=${encoded}`
+  playgroundUrl.value = `${playgroundBase}/?code=${encoded}`
 })
 </script>
 

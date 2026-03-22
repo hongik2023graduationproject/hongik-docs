@@ -20,7 +20,7 @@
 출력(결과)    // 10
 ```
 
-<a :href="'/playground/?code=' + encodeURIComponent('함수 더하기(정수 a, 정수 b) -> 정수:\n    리턴 a + b\n\n정수 결과 = 더하기(3, 7)\n출력(결과)')" target="_blank">플레이그라운드에서 실행 →</a>
+<a :href="$playgroundUrl + '/?code=' + encodeURIComponent('함수 더하기(정수 a, 정수 b) -> 정수:\n    리턴 a + b\n\n정수 결과 = 더하기(3, 7)\n출력(결과)')" target="_blank">플레이그라운드에서 실행 →</a>
 
 ## 반환값이 없는 함수
 
@@ -60,4 +60,4 @@
 출력(팩토리얼(5))    // 120
 ```
 
-<a :href="'/playground/?code=' + encodeURIComponent('함수 팩토리얼(정수 n) -> 정수:\n    만약 n <= 1 라면:\n        리턴 1\n    리턴 n * 팩토리얼(n - 1)\n\n출력(팩토리얼(5))\n출력(팩토리얼(10))')" target="_blank">플레이그라운드에서 실행 →</a>
+<a :href="$playgroundUrl + '/?code=' + encodeURIComponent('함수 팩토리얼(정수 n) -> 정수:\n    만약 n <= 1 라면:\n        리턴 1\n    리턴 n * 팩토리얼(n - 1)\n\n출력(팩토리얼(5))\n출력(팩토리얼(10))')" target="_blank">플레이그라운드에서 실행 →</a>

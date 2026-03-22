@@ -81,4 +81,4 @@ c.증가()
 출력(c.현재값())    // 2
 ```
 
-<a :href="'/playground/?code=' + encodeURIComponent('클래스 카운터:\n    정수 값\n\n    생성():\n        자기.값 = 0\n\n    함수 증가():\n        자기.값 += 1\n\n    함수 현재값() -> 정수:\n        리턴 자기.값\n\n카운터 c = 카운터()\nc.증가()\nc.증가()\nc.증가()\n출력(c.현재값())')" target="_blank">플레이그라운드에서 실행 →</a>
+<a :href="$playgroundUrl + '/?code=' + encodeURIComponent('클래스 카운터:\n    정수 값\n\n    생성():\n        자기.값 = 0\n\n    함수 증가():\n        자기.값 += 1\n\n    함수 현재값() -> 정수:\n        리턴 자기.값\n\n카운터 c = 카운터()\nc.증가()\nc.증가()\nc.증가()\n출력(c.현재값())')" target="_blank">플레이그라운드에서 실행 →</a>

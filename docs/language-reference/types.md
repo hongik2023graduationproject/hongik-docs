@@ -106,7 +106,7 @@ hong-ik은 강타입 언어로, 모든 값은 명확한 타입을 가집니다.
 실수 f = 실수변환(fstr)   // 3.14
 ```
 
-<a :href="'/playground/?code=' + encodeURIComponent('문자 str = &quot;42&quot;\n정수 num = 정수변환(str)\n출력(num)\n출력(타입(num))\n\n정수 n = 100\n문자 text = 문자변환(n)\n출력(text)\n출력(타입(text))')" target="_blank">플레이그라운드에서 실행 →</a>
+<a :href="$playgroundUrl + '/?code=' + encodeURIComponent('문자 str = &quot;42&quot;\n정수 num = 정수변환(str)\n출력(num)\n출력(타입(num))\n\n정수 n = 100\n문자 text = 문자변환(n)\n출력(text)\n출력(타입(text))')" target="_blank">플레이그라운드에서 실행 →</a>
 
 ## 타입 확인
 
@@ -118,7 +118,7 @@ hong-ik은 강타입 언어로, 모든 값은 명확한 타입을 가집니다.
 출력(타입(s))              // "문자"
 ```
 
-<a :href="'/playground/?code=' + encodeURIComponent('정수 x = 10\n출력(타입(x))\n\n문자 s = &quot;hello&quot;\n출력(타입(s))\n\n배열 arr = [1, 2, 3]\n출력(타입(arr))')" target="_blank">플레이그라운드에서 실행 →</a>
+<a :href="$playgroundUrl + '/?code=' + encodeURIComponent('정수 x = 10\n출력(타입(x))\n\n문자 s = &quot;hello&quot;\n출력(타입(s))\n\n배열 arr = [1, 2, 3]\n출력(타입(arr))')" target="_blank">플레이그라운드에서 실행 →</a>
 
 ## 타입 비교
 
