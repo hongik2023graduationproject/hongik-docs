@@ -6,6 +6,12 @@ dist/
 docs/.vitepress/dist/
 docs/.vitepress/cache/
 
+# WASM 산출물 — hong-ik release에서 CI가 받아오므로 커밋하지 않는다.
+# 로컬에서 docs:dev를 돌리려면 `./scripts/sync-wasm.sh`를 한 번 실행해 docs/public/에 산출물 배치.
+docs/public/hongik-wasm.js
+docs/public/hongik-wasm.wasm
+docs/public/manifest.json
+
 # OS
 .DS_Store
 

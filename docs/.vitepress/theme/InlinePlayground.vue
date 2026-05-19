@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
 
-const props = defineProps<{
-  apiUrl?: string
-}>()
+// 이전 버전은 백엔드 `/api/execute`에 POST 했지만, 현재는 브라우저에서 WASM 인터프리터를 직접 실행한다.
+// 백엔드를 거치지 않으므로 (1) 서버 부담 제로, (2) 사용자 코드가 서버에 도달하지 않아 샌드박싱 격차 해소.
+// /hongik-wasm.js + /hongik-wasm.wasm은 docs 빌드 시점에 scripts/sync-wasm.sh로 hong-ik release에서 가져온다.
 
 const wrapper = ref<HTMLElement>()
 const originalCode = ref('')
@@ -14,7 +14,62 @@ const isEditing = ref(false)
 const hasError = ref(false)
 const textareaEl = ref<HTMLTextAreaElement>()
 
-const apiBase = props.apiUrl || 'https://api.hong-ik.dev'
+// 페이지 내 모든 InlinePlayground가 단일 인터프리터 인스턴스를 공유 (메모리 절약).
+// JS는 단일 스레드라 동시 실행 충돌은 발생하지 않고, 각 실행 전 reset()으로 상태 초기화.
+let interpreterPromise: Promise<HongIkInterpreterInstance> | null = null
+const WASM_TIMEOUT_MS = 5000
+
+interface HongIkInterpreterInstance {
+  execute(code: string): string
+  executeWithTimeout(code: string, timeoutMs: number): string
+  reset(): void
+  delete(): void
+}
+
+interface HongIkEmscriptenModule {
+  HongIkInterpreter: new () => HongIkInterpreterInstance
+}
+
+declare global {
+  interface Window {
+    HongIkModule?: (opts?: Record<string, unknown>) => Promise<HongIkEmscriptenModule>
+  }
+}
+
+function loadInterpreter(): Promise<HongIkInterpreterInstance> {
+  if (interpreterPromise) return interpreterPromise
+
+  interpreterPromise = (async () => {
+    if (typeof window === 'undefined') {
+      // SSR 단계 — runCode가 호출되지 않으므로 도달하지 않아야 하지만 방어적으로.
+      throw new Error('WASM은 브라우저에서만 사용 가능합니다')
+    }
+
+    if (!window.HongIkModule) {
+      await new Promise<void>((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = '/hongik-wasm.js'
+        script.async = true
+        script.onload = () => resolve()
+        script.onerror = () => reject(new Error('WASM 글루코드를 불러올 수 없습니다'))
+        document.head.appendChild(script)
+      })
+    }
+
+    if (!window.HongIkModule) {
+      throw new Error('HongIkModule이 전역에 등록되지 않았습니다')
+    }
+
+    const moduleInstance = await window.HongIkModule({
+      // emcc의 MODULARIZE 출력은 .wasm 위치를 locateFile로 찾는다.
+      // VitePress의 base path가 / 가 아니면 그에 맞춰야 한다 (현재 기본 /).
+      locateFile: (path: string) => '/' + path,
+    })
+    return new moduleInstance.HongIkInterpreter()
+  })()
+
+  return interpreterPromise
+}
 
 onMounted(() => {
   if (!wrapper.value) return
@@ -52,27 +107,45 @@ function onInput(e: Event) {
   autoResize(target)
 }
 
+interface ExecuteResultJson {
+  success: boolean
+  output?: string
+  error?: { message?: string } | string | null
+}
+
 async function runCode() {
   isRunning.value = true
   output.value = ''
   hasError.value = false
 
   try {
-    const res = await fetch(`${apiBase}/api/execute`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: editableCode.value, timeout: 5 }),
-    })
-    const data = await res.json()
-    if (res.ok && data.status === 'success') {
-      output.value = data.output || '(실행 완료 - 출력 없음)'
+    const interp = await loadInterpreter()
+    // 이전 실행의 전역 상태(변수, 함수 정의 등)를 비운다. 매 실행을 격리.
+    interp.reset()
+
+    const rawResult = interp.executeWithTimeout(editableCode.value, WASM_TIMEOUT_MS)
+    let parsed: ExecuteResultJson
+    try {
+      parsed = JSON.parse(rawResult) as ExecuteResultJson
+    } catch {
+      output.value = '인터프리터 응답을 파싱할 수 없습니다'
+      hasError.value = true
+      return
+    }
+
+    if (parsed.success) {
+      output.value = parsed.output || '(실행 완료 - 출력 없음)'
       hasError.value = false
     } else {
-      output.value = data.error || data.output || `오류 (${res.status})`
+      const errMsg = typeof parsed.error === 'string'
+        ? parsed.error
+        : parsed.error?.message || '실행 오류'
+      output.value = errMsg
       hasError.value = true
     }
-  } catch (err: any) {
-    output.value = `연결 실패: ${err.message}`
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err)
+    output.value = `실행 실패: ${msg}`
     hasError.value = true
   } finally {
     isRunning.value = false

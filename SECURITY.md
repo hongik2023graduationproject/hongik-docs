@@ -29,5 +29,6 @@
 ## 보안 모델 요약
 
 - 정적 사이트(VitePress) + nginx로 서빙
-- `InlinePlayground.vue`는 사용자 입력 코드를 백엔드 `/api/execute`로 POST. 출력은 Vue 텍스트 보간(`{{ output }}`)으로만 렌더링 → XSS 차단됨
+- `InlinePlayground.vue`는 브라우저에서 hong-ik WASM 인터프리터를 **로컬로 실행**한다 (백엔드 호출 없음). 사용자 코드는 사용자 브라우저 밖으로 나가지 않으며, 따라서 서버 측 코드 실행 샌드박싱 문제 자체가 존재하지 않는다. 출력은 Vue 텍스트 보간(`{{ output }}`)으로만 렌더링 → XSS 차단.
 - nginx에 보안 헤더 적용: HSTS, X-Frame-Options DENY, CSP (`unsafe-inline`은 VitePress 호환을 위해 임시 허용 — 추후 hash/nonce로 좁힐 예정)
+- WASM 산출물은 hong-ik 저장소의 GitHub Release에서 빌드 시점에 동기화 (`scripts/sync-wasm.sh`). 직접 커밋된 binary는 없다.
