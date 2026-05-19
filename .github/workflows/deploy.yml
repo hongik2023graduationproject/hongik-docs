@@ -4,9 +4,29 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'docs/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'Dockerfile'
+      - 'nginx.conf'
+      - '.github/workflows/deploy.yml'
   pull_request:
     branches:
       - main
+    paths:
+      - 'docs/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'Dockerfile'
+      - 'nginx.conf'
+      - '.github/workflows/deploy.yml'
+
+# main에 빠르게 연속 푸시될 때 :latest 태그를 두 job이 동시에 밀어 경합하는 것을 막는다.
+# 같은 ref 안에서는 한 번에 하나만 돌고, 새로 들어오면 진행 중인 것을 취소한다.
+concurrency:
+  group: docs-deploy-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-test:
@@ -43,16 +63,13 @@ jobs:
       - name: 코드 체크아웃
         uses: actions/checkout@v4
 
-      - name: Node.js 설정
-        uses: actions/setup-node@v4
+      # build-test에서 이미 빌드된 산출물을 그대로 받아 docker 이미지에 넣는다.
+      # 중복 npm ci + docs:build를 제거해 deploy job 시간이 60~90초 줄어든다.
+      - name: 빌드 결과물 다운로드
+        uses: actions/download-artifact@v4
         with:
-          node-version: '20'
-
-      - name: 의존성 설치
-        run: npm ci
-
-      - name: 문서 빌드
-        run: npm run docs:build
+          name: docs-dist
+          path: docs/.vitepress/dist
 
       - name: QEMU 설정 (arm64 크로스빌드)
         uses: docker/setup-qemu-action@v3
