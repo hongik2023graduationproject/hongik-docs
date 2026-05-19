@@ -6,7 +6,7 @@
 
 `시도`/`실패`로 오류를 처리합니다:
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 시도:
@@ -15,13 +15,13 @@
     출력("오류 발생: {오류}")
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 일반적인 오류 상황
 
 ### 0으로 나누기
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 함수 안전나눗셈(정수 a, 정수 b) -> 정수:
@@ -35,7 +35,7 @@
 출력(안전나눗셈(10, 0))    // 0
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ### 타입 변환 오류
 

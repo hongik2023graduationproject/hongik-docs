@@ -6,7 +6,7 @@
 
 배열의 각 요소에 함수를 적용합니다:
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 함수 두배(정수 x) -> 정수:
@@ -17,7 +17,7 @@
 출력(결과)    // [2, 4, 6, 8, 10]
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 걸러내기 - 조건 필터
 
@@ -48,7 +48,7 @@
 
 고차 함수를 연결하면 강력한 데이터 처리가 가능합니다:
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 함수 양수(정수 x) -> 논리:
@@ -70,7 +70,7 @@
 출력(결과)
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 실전 예제: 단어 분석
 

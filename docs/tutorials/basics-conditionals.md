@@ -30,7 +30,7 @@
 
 `아니면 만약`으로 여러 조건을 검사합니다:
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 정수 점수 = 85
@@ -47,7 +47,7 @@
     출력("F")
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 복합 조건
 
@@ -74,7 +74,7 @@
 
 여러 값을 비교할 때는 `비교`를 사용합니다:
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 정수 요일 = 3
@@ -90,7 +90,7 @@
         출력("기타")
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 연습 문제
 

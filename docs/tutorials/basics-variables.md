@@ -6,14 +6,14 @@
 
 변수는 값을 저장하는 이름이 지어진 상자입니다.
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 정수 나이 = 25
 출력(나이)  // 25
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 기본 타입
 
@@ -137,7 +137,7 @@ x = x + 5
 
 변수를 사용해 계산합니다.
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 정수 가격 = 50000
@@ -151,7 +151,7 @@ x = x + 5
 출력("최종 가격: " + 문자변환(최종가격))
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 실습 문제
 

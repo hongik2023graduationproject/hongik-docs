@@ -27,7 +27,7 @@
 
 `리턴`으로 결과를 돌려줍니다:
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 함수 더하기(정수 a, 정수 b) -> 정수:
@@ -37,7 +37,7 @@
 출력(결과)    // 10
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 기본 매개변수
 
@@ -55,7 +55,7 @@
 
 함수가 자기 자신을 호출합니다:
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 함수 팩토리얼(정수 n) -> 정수:
@@ -66,7 +66,7 @@
 출력(팩토리얼(5))    // 120
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 실전 예제: BMI 계산기
 

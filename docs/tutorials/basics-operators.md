@@ -4,7 +4,7 @@
 
 ## 산술 연산자
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 정수 a = 10
@@ -17,7 +17,7 @@
 출력(a % b)    // 1  (나머지)
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 비교 연산자
 
@@ -44,7 +44,7 @@
 
 변수의 값을 갱신하는 축약 표현입니다:
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 정수 x = 10
@@ -55,7 +55,7 @@ x /= 4     // x = x / 4 = 6
 출력(x)    // 6
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 문자열 연결
 

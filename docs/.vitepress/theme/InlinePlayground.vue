@@ -58,17 +58,17 @@ async function runCode() {
   hasError.value = false
 
   try {
-    const res = await fetch(`${apiBase}/run`, {
+    const res = await fetch(`${apiBase}/api/execute`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: editableCode.value }),
+      body: JSON.stringify({ code: editableCode.value, timeout: 5 }),
     })
     const data = await res.json()
-    if (res.ok) {
-      output.value = data.output || data.result || '(실행 완료 - 출력 없음)'
-      hasError.value = !!data.error
+    if (res.ok && data.status === 'success') {
+      output.value = data.output || '(실행 완료 - 출력 없음)'
+      hasError.value = false
     } else {
-      output.value = data.error || data.message || `오류 (${res.status})`
+      output.value = data.error || data.output || `오류 (${res.status})`
       hasError.value = true
     }
   } catch (err: any) {

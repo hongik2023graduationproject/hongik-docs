@@ -4,7 +4,7 @@
 
 ## 클래스 정의
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 클래스 학생:
@@ -30,7 +30,7 @@
         리턴 "{자기.이름} ({자기.나이}세)"
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 인스턴스 사용
 

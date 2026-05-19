@@ -4,7 +4,7 @@
 
 ## 배열 생성과 접근
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 배열 과일 = ["사과", "배", "포도", "딸기"]
@@ -13,7 +13,7 @@
 출력(길이(과일))  // 4
 ```
 
-</RunCode>
+</InlinePlayground>
 
 ## 배열 수정
 
@@ -37,14 +37,14 @@
 
 ## for-range 반복문
 
-<RunCode>
+<InlinePlayground>
 
 ```hik
 반복 정수 i = 1 부터 6 까지:
     출력("{i} x {i} = {i * i}")
 ```
 
-</RunCode>
+</InlinePlayground>
 
 출력:
 ```
