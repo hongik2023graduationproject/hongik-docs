@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 코드 체크아웃
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Node.js 설정
         uses: actions/setup-node@v4
@@ -61,7 +61,7 @@ jobs:
       packages: write
     steps:
       - name: 코드 체크아웃
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # build-test에서 이미 빌드된 산출물을 그대로 받아 docker 이미지에 넣는다.
       # 중복 npm ci + docs:build를 제거해 deploy job 시간이 60~90초 줄어든다.
