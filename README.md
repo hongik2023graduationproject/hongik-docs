@@ -1,6 +1,11 @@
 # hong-ik Documentation Site
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![VitePress](https://img.shields.io/badge/VitePress-1-646CFF.svg?logo=vite)](https://vitepress.dev/)
+
 [hong-ik](https://github.com/hongik2023graduationproject/hong-ik) 프로그래밍 언어의 공식 문서 사이트입니다.
+
+📖 **문서**: [기여 가이드](./CONTRIBUTING.md) · [보안 정책](./SECURITY.md) · [변경 이력](./CHANGELOG.md) · [라이선스](./LICENSE)
 
 ## 프로젝트 구조
 
