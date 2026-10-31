@@ -1,5 +1,9 @@
 # hong-ik Documentation Site
 
+> [!IMPORTANT]
+> **더 이상 사용하지 않는 저장소입니다 (보관됨).** 이 문서 사이트는 2026년 10월 [hongik-new-web](https://github.com/hongik2023graduationproject/hongik-new-web)의 Astro 사이트로 옮겨졌습니다. 문서는 이제 https://hongik.tolelom.xyz/docs/ 에 있고.
+> 현재 프로젝트는 [hong-ik](https://github.com/hongik2023graduationproject/hong-ik)(언어 인터프리터)과 [hongik-new-web](https://github.com/hongik2023graduationproject/hongik-new-web)(웹사이트 — https://hongik.tolelom.xyz 소개·플레이그라운드·문서)입니다.
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![VitePress](https://img.shields.io/badge/VitePress-1-646CFF.svg?logo=vite)](https://vitepress.dev/)
 
